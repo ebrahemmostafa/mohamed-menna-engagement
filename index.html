@@ -68,17 +68,13 @@ body{background:#efebe2;font-family:'Cormorant Garamond',serif;color:#3f4c5f;ove
   filter:drop-shadow(0 22px 28px rgba(64,74,88,.16));
 }
 .scratch-photo{
-  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;filter:saturate(.84) sepia(.08) brightness(1.03);
+  position:absolute;inset:0;z-index:3;width:100%;height:100%;object-fit:cover;object-position:center;filter:saturate(.84) sepia(.08) brightness(1.03);
   -webkit-mask:url('assets/hero-oval-mask-reference.png') center/100% 100% no-repeat;
   mask:url('assets/hero-oval-mask-reference.png') center/100% 100% no-repeat;
 }
 .scratch-frame{
-  position:absolute;inset:0;z-index:3;pointer-events:none;
+  position:absolute;inset:0;z-index:2;pointer-events:none;
   background:url('assets/hero-frame-reference.png') center/100% 100% no-repeat;
-  -webkit-mask-image:linear-gradient(#fff 0 0),url('assets/hero-oval-mask-reference.png');
-  -webkit-mask-size:100% 100%,100% 100%;-webkit-mask-repeat:no-repeat;-webkit-mask-composite:xor;
-  mask-image:linear-gradient(#fff 0 0),url('assets/hero-oval-mask-reference.png');
-  mask-size:100% 100%,100% 100%;mask-repeat:no-repeat;mask-composite:exclude;
   filter:drop-shadow(0 3px 4px rgba(101,88,66,.15));
 }
 #scratchCanvas{position:absolute;inset:0;z-index:4;width:100%;height:100%;touch-action:none;cursor:grab}
