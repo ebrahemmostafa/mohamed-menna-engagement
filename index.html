@@ -1275,18 +1275,41 @@ document.querySelectorAll(".reveal").forEach(el=>{
 </script>
 <!-- ✅ Background Music -->
 
+<div id="ytplayer" style="display:none; position:absolute; top:-9999px;"></div>
 <script>
-  let music;
+  let ytPlayer;
+  let ytReady = false;
   let musicStarted = false;
 
-  const MUSIC_URL = "https://res.cloudinary.com/dqbcnwuwy/video/upload/v1780522277/Hussain_Al_Jassmi_-_Ana_Wel_Amar_Album_HJ2025_%D8%AD%D8%B3%D9%8A%D9%86_%D8%A7%D9%84%D8%AC%D8%B3%D9%85%D9%8A_-_%D8%A7%D9%86%D8%A7_%D9%88%D8%A7%D9%84%D9%82%D9%85%D8%B1_-_Hussain_Al_Jassmi_%D8%AD%D8%B3%D9%8A%D9%86_%D8%A7%D9%84%D8%AC%D8%B3%D9%85%D9%8A_cjjaqv.mp3";
+  const tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/iframe_api";
+  const firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+  window.onYouTubeIframeAPIReady = function() {
+    ytPlayer = new YT.Player('ytplayer', {
+      height: '0',
+      width: '0',
+      videoId: 'Yk2aRsM23HQ',
+      playerVars: {
+        'autoplay': 0,
+        'loop': 1,
+        'playlist': 'Yk2aRsM23HQ',
+        'controls': 0
+      },
+      events: {
+        'onReady': function() { ytReady = true; }
+      }
+    });
+  };
 
   function fadeIn() {
     let vol = 0;
+    ytPlayer.setVolume(0);
     const fade = setInterval(() => {
-      if (vol < 0.3) {
-        vol += 0.01;
-        music.volume = vol;
+      if (vol < 30) {
+        vol += 2;
+        ytPlayer.setVolume(vol);
       } else {
         clearInterval(fade);
       }
@@ -1294,56 +1317,36 @@ document.querySelectorAll(".reveal").forEach(el=>{
   }
 
   function startMusic() {
-    if (musicStarted) return;
+    if (musicStarted || !ytReady) return;
     musicStarted = true;
-
-    music = new Audio(MUSIC_URL);
-    music.loop = true;
-    music.volume = 0;
-
-    music.play()
-      .then(() => fadeIn())
-      .catch(err => {
-        console.log("Blocked:", err);
-        musicStarted = false;
-      });
+    ytPlayer.playVideo();
+    fadeIn();
   }
 
   function resumeMusic() {
-    if (music && music.paused && musicStarted) {
-      music.play().catch(err => console.log(err));
+    if (ytReady && musicStarted && ytPlayer.playVideo) {
+      ytPlayer.playVideo();
     }
   }
 
-  // ✅ Any mouse movement on desktop
-  document.addEventListener("mousemove", startMusic, { once: true });
+  const startEvents = ["mousemove", "scroll", "touchstart", "keydown", "click"];
+  startEvents.forEach(evt => {
+    document.addEventListener(evt, () => {
+      if (!musicStarted && ytReady) startMusic();
+    });
+  });
 
-  // ✅ Any scroll
-  document.addEventListener("scroll", startMusic, { once: true });
-
-  // ✅ Any touch on mobile (just touching screen, no need to click)
-  document.addEventListener("touchstart", startMusic, { once: true });
-
-  // ✅ Any key press
-  document.addEventListener("keydown", startMusic, { once: true });
-
-  // ✅ Click as backup
-  document.addEventListener("click", startMusic, { once: true });
-
-  // ✅ Resume when coming back to tab
   document.addEventListener("visibilitychange", () => {
     if (document.visibilityState === "visible") resumeMusic();
   });
-
-  // ✅ Resume on window focus
   window.addEventListener("focus", resumeMusic);
-
-  // ✅ Resume on mobile app switch back
   window.addEventListener("pageshow", resumeMusic);
-
-  // ✅ Keep alive check every second
-  setInterval(resumeMusic, 1000);
+  setInterval(() => {
+    if (ytReady && musicStarted && ytPlayer.getPlayerState && ytPlayer.getPlayerState() !== 1) {
+      resumeMusic();
+    }
+  }, 1000);
 </script>
-
 </body>
 </html>
+
