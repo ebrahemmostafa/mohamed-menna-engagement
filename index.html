@@ -359,82 +359,6 @@ body{background:#efebe2;font-family:'Cormorant Garamond',serif;color:#3f4c5f;ove
     transparent
   );
 }
-.wish-feed{
-  max-height: 300px;
-  overflow-y: auto;
-  padding-right: 4px;
-  scroll-behaviour: smooth;
-  -webkit-overflow-scrolling: touch;
-  position: relative;
-
-  display: flex;
-  flex-direction: column;
-  gap: 12px;              /* spacing between messages */
-}
-
-.wish-card{
-  background: var(--card);
-  border: 1px solid rgba(101,119,142,.14);
-  border-radius: 10px;
-  padding: 18px 18px;
-  box-shadow: 0 2px 12px rgba(80,96,119,.07);
-  position: relative;
-
-  overflow: visible;      /* IMPORTANT: don't clip text/name */
-  min-height: fit-content;
-  flex-shrink: 0;         /* IMPORTANT: cards must not shrink */
-  height: auto;           /* let card grow with message */
-}
-
-.wish-card::before{
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 3px;
-  background: linear-gradient(to bottom,var(--blush),var(--rose-l));
-  border-radius: 3px 0 0 3px;
-}
-
-.wish-txt{
-  display: block;
-  margin: 0 0 8px 0;
-
-  font-size: 14px;
-  line-height: 1.7;
-  colour: var(--ink2);
-  font-style: italic;
-
-  white-space: normal;          /* allow wrapping */
-  word-break: break-word;       /* break long words if needed */
-  overflow-wrap: anywhere;      /* safer wrapping on mobile */
-}
-
-.wish-from{
-  display: block;
-  margin-top: 6px;
-
-  font-family: 'Cinzel', serif;
-  font-size: 12px;
-  letter-spacing: 1px;
-  colour: var(--rose);
-  opacity: 0.85;
-}
-
-.wish-feed::after{
-  content: "";
-  position: sticky;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: block;
-  height: 20px;
-  background: linear-gradient(to top, var(--card), transparent);
-  pointer-events: none;
-}
-``
-
 /* text */
 .sc-tag{
   font-family:'Cinzel',serif;
@@ -556,23 +480,18 @@ body{background:#efebe2;font-family:'Cormorant Garamond',serif;color:#3f4c5f;ove
 .loc-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 26px;border:1px solid rgba(101,119,142,.26);border-radius:30px;font-family:'Cinzel',serif;font-weight:300;font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--rose);background:rgba(231,233,235,.5);text-decoration:none;transition:all .3s}
 .loc-btn:hover{background:var(--rose-p);border-color:var(--rose-l);box-shadow:0 4px 16px rgba(80,96,119,.12)}
 
-/* â•â• WISHES â•â• */
-.wish-inner{max-width:560px;margin:36px auto 0}
-.wish-form{display:flex;flex-direction:column;gap:13px;margin-bottom:34px}
-.wish-inp{padding:14px 18px;border:1px solid rgba(101,119,142,.2);border-radius:10px;background:var(--card);font-family:'Cormorant Garamond',serif;font-style:italic;font-size:17px;color:var(--ink);outline:none;transition:border-color .3s;width:100%}
+/* â•â• WISH FORM â•â• */
+.wish-form{max-width:560px;margin:36px auto 0;display:flex;flex-direction:column;gap:13px}
+.wish-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.wish-inp{width:100%;padding:14px 18px;border:1px solid rgba(101,119,142,.2);border-radius:10px;background:var(--card);font-family:'Cormorant Garamond',serif;font-style:italic;font-size:17px;color:var(--ink);outline:none;transition:border-color .3s,box-shadow .3s}
 .wish-inp::placeholder{color:var(--ink4)}
-.wish-inp:focus{border-color:var(--rose-l)}
+.wish-inp:focus{border-color:var(--rose-l);box-shadow:0 0 0 3px rgba(174,185,199,.18)}
 textarea.wish-inp{resize:vertical;min-height:90px}
-.wish-send{align-self:center;padding:14px 40px;background:linear-gradient(135deg,var(--rose-l),var(--mauve));border:none;border-radius:30px;font-family:'Cinzel',serif;font-weight:300;font-size:10px;letter-spacing:5px;text-transform:uppercase;color:#fff;cursor:pointer;box-shadow:0 4px 18px rgba(80,96,119,.26);transition:transform .25s,box-shadow .25s}
+.wish-send{align-self:center;padding:14px 40px;background:linear-gradient(135deg,var(--rose-l),var(--mauve));border:none;border-radius:30px;font-family:'Cinzel',serif;font-weight:300;font-size:10px;letter-spacing:5px;text-transform:uppercase;color:#fff;cursor:pointer;box-shadow:0 4px 18px rgba(80,96,119,.26);transition:transform .25s,box-shadow .25s,opacity .25s}
 .wish-send:hover{transform:translateY(-2px);box-shadow:0 8px 26px rgba(80,96,119,.34)}
-.wish-empty{text-align:center;padding:48px 24px;border:1.5px dashed rgba(101,119,142,.22);border-radius:12px;background:rgba(231,233,235,.18)}
-.wish-empty-icon{font-size:36px;display:block;margin-bottom:12px;opacity:.55}
-.wish-empty-txt{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:18px;color:var(--ink3);line-height:1.85}
-.wish-feed{display:none !important;flex-direction:column;gap:14px}
-.wish-card{background:var(--card);border:1px solid rgba(101,119,142,.14);border-radius:10px;padding:22px 22px;box-shadow:0 2px 12px rgba(80,96,119,.07);position:relative;overflow:hidden}
-.wish-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,var(--blush),var(--rose-l));border-radius:3px 0 0 3px}
-.wish-txt{font-size:17px;font-style:italic;color:var(--ink1);line-height:1.75;margin-bottom:8px}
-.wish-from{font-family:'Cinzel',serif;font-weight:300;font-size:9px;letter-spacing:4px;color:var(--rose);text-transform:uppercase}
+.wish-send:disabled{cursor:wait;opacity:.6;transform:none}
+.wish-status{min-height:22px;margin:0;text-align:center;color:var(--rose);font-size:15px;font-style:italic}
+.wish-responses{margin-top:8px;align-self:center}
 
 /* â•â• FOOTER â•â• */
 footer{background:var(--ink);padding:60px 28px 48px;text-align:center}
@@ -782,13 +701,11 @@ footer{background:var(--ink);padding:60px 28px 48px;text-align:center}
     </div>
   </div>
 
-<!-- WISHES -->
+<!-- WISH FORM -->
 <div class="band reveal">
   <div class="inner" style="text-align:center">
-
     <span class="eyebrow">Blessings &amp; Wishes</span>
     <h2 class="sec-h">Leave a blessing</h2>
-
     <div class="orn">
       <div class="orn-l"></div>
       <div class="orn-s"></div>
@@ -796,45 +713,15 @@ footer{background:var(--ink);padding:60px 28px 48px;text-align:center}
       <div class="orn-s"></div>
       <div class="orn-l r"></div>
     </div>
-
-    <div class="wish-inner">
-
-     <div class="wish-form">
-
-  <!-- âœ… Name input -->
-  <input
-    type="text"
-    class="wish-inp wish-name"
-    placeholder="Your name"
-    maxlength="80"
-  />
-
-  <!-- âœ… Message textarea -->
-  <textarea
-    class="wish-inp wish-message"
-    placeholder="Write your blessing..."
-    maxlength="500"
-  ></textarea>
-
-  <!-- âœ… Send button -->
-  <button class="wish-send">
-    SEND ðŸ’Œ
-  </button>
-
-</div>
-
-      <div class="wish-empty" id="wishEmpty">
-        <span class="wish-empty-icon">ðŸ’¬</span>
-        <p class="wish-empty-txt">
-          Be the first to leave something we'll remember ðŸ‘€<br>
-          for Mohammed &amp; Menna on their special day
-        </p>
-      </div>
-
-      <div class="wish-feed" id="wishFeed"></div>
-
-    </div>
-
+    <form class="wish-form" id="wishForm">
+      <label class="wish-label" for="wishName">Your name</label>
+      <input class="wish-inp" id="wishName" name="name" type="text" maxlength="80" placeholder="Your name" autocomplete="name" dir="auto">
+      <label class="wish-label" for="wishMessage">Your blessing</label>
+      <textarea class="wish-inp" id="wishMessage" name="message" maxlength="500" placeholder="Write your blessing..." required dir="auto"></textarea>
+      <button class="wish-send" id="wishSend" type="submit">Send &#x1F48C;</button>
+      <p class="wish-status" id="wishStatus" role="status" aria-live="polite"></p>
+      <a class="loc-btn wish-responses" href="wishes.html">View all wishes</a>
+    </form>
   </div>
 </div>
 
@@ -1152,21 +1039,6 @@ function tick(){
 }
 tick();setInterval(tick,1000);
 
-/* wishes */
-function addWish(){
-  const n=document.getElementById('wName').value.trim();
-  const t=document.getElementById('wText').value.trim();
-  if(!n||!t){alert('Please fill in both fields.');return;}
-  document.getElementById('wishEmpty').style.display='none';
-  document.getElementById('wishFeed').style.display='flex';
-  const c=document.createElement('div');c.className='wish-card';
-  c.innerHTML=`<p class="wish-txt">&ldquo;${t}&rdquo;</p><span class="wish-from">&#x1F48C; ${n}</span>`;
-  c.style.cssText='opacity:0;transform:translateY(12px);transition:opacity .5s,transform .5s';
-  document.getElementById('wishFeed').prepend(c);
-  requestAnimationFrame(()=>{c.style.opacity='1';c.style.transform='translateY(0)'});
-  document.getElementById('wName').value='';document.getElementById('wText').value='';
-}
-
 /* scroll reveal */
 const ro=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis','visible')});},{threshold:.08});
 document.querySelectorAll('.reveal,.story-card-l,.story-card-r').forEach(el=>ro.observe(el));
@@ -1186,93 +1058,8 @@ document.querySelectorAll(".reveal").forEach(el=>{
   observer.observe(el);
 });
 </script>
-<!-- Supabase wishes database -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-  const supabaseUrl = "https://jcuqwcwkowtjxcykstlf.supabase.co";
-  const supabasePublishableKey = "sb_publishable_BFtrH3u_sv9zat6B9SALyw_nS7Pajaa";
-  const supabaseClient = window.supabase.createClient(supabaseUrl, supabasePublishableKey);
-  const wishesTable = "mohammed_menna_wishes";
-  const feed = document.querySelector(".wish-feed");
-  const empty = document.querySelector(".wish-empty");
-  const sendButton = document.querySelector(".wish-send");
-  const renderedWishIds = new Set();
-
-  function renderWish(data) {
-    if (!data?.message || (data.id && renderedWishIds.has(data.id))) return;
-    if (data.id) renderedWishIds.add(data.id);
-    if (empty) empty.style.display = "none";
-    if (feed) feed.style.display = "flex";
-
-    const card = document.createElement("div");
-    card.className = "wish-card";
-
-    const message = document.createElement("span");
-    message.className = "wish-txt";
-    message.textContent = data.message || "";
-
-    const sender = document.createElement("span");
-    sender.className = "wish-from";
-    sender.textContent = `â€” ${data.name || "Guest"}`;
-
-    card.replaceChildren(message, sender);
-    feed.appendChild(card);
-    feed.scrollTop = feed.scrollHeight;
-  }
-
-  async function loadWishes() {
-    const { data, error } = await supabaseClient
-      .from(wishesTable)
-      .select("id,name,message,created_at")
-      .order("created_at", { ascending: true });
-
-    if (error) {
-      console.error("Unable to load wishes:", error.message);
-      return;
-    }
-
-    data.forEach(renderWish);
-  }
-
-  sendButton.addEventListener("click", async () => {
-    const nameInput = document.querySelector(".wish-name");
-    const messageInput = document.querySelector(".wish-message");
-    const name = nameInput?.value?.trim() || "Guest";
-    const message = messageInput?.value?.trim();
-
-    if (!message) {
-      alert("Write a wish first !");
-      return;
-    }
-
-    sendButton.disabled = true;
-    try {
-      const { error } = await supabaseClient
-        .from(wishesTable)
-        .insert({ name, message });
-
-      if (error) throw error;
-      nameInput.value = "";
-      messageInput.value = "";
-    } catch (error) {
-      console.error("Unable to send wish:", error.message);
-      alert("We couldn't send your wish. Please try again.");
-    } finally {
-      sendButton.disabled = false;
-    }
-  });
-
-  supabaseClient
-    .channel("mohammed-menna-wishes")
-    .on("postgres_changes", {
-      event: "INSERT",
-      schema: "public",
-      table: wishesTable
-    }, payload => renderWish(payload.new))
-    .subscribe();
-
-  loadWishes();
-</script>
+<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script defer src="wish-submit.js"></script>
 <!-- âœ… Background Music -->
 
 <div id="ytplayer" style="display:none; position:absolute; top:-9999px;"></div>
